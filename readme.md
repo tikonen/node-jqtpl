@@ -122,6 +122,17 @@ Examples:
 	//output
     <div>6</div>
 
+### %{} - simple output (not escaped)
+
+	// tpl
+    <div>%{a}</div>
+
+	// code
+    jqtpl.tmpl( tpl, {a:'<br/>'});
+
+    // output
+    <div><br/></div>
+
 ### {{if}} and {{else}}
 
 	// tpl
@@ -228,10 +239,18 @@ If you want to skip a part of your template, which should be rendered on the cli
 
 ### Usage
 
+Express 3.0 and later
+
+    app.set("view engine", "html");
+	app.engine('.html', require('jqtpl').express.renderFile);
+
+Express 2.0
+
     app.set("view engine", "html");
     app.register(".html", require("jqtpl").express);
 
-### {{partial}} tag
+
+### {{partial}} tag  (Deprecated and not supported since Express 3.0)
 
 Read express documentation here http://expressjs.com/guide.html#res.partial()
 
@@ -282,10 +301,13 @@ Using array of data:
 		<div class="partial">Test2</div>
     </div>
 
-### {{layout}} tag
+### {{layout}} tag (Deprecated since Express 3.0)
 
 Using layout tag in a view it is possible to define a layout within this view.
 Note: it is possible since express@2.2.1.
+
+Since express@3.0 {{layout}} tag has been deprecated, but template
+implementation has backwards compatible emulation.
 
 	// tpl
 
